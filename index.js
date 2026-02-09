@@ -32,13 +32,18 @@ app.post("/webhook", async (req, res) => {
     `);
 
   } catch (error) {
-res.type("text/xml")    
-res.send(`
-      <Response>
-        <Message>Error en el bot</Message>
-      </Response>
-    `);
-  }
+
+  console.log("ERROR OPENAI:");
+  console.log(error.response?.data || error.message);
+
+  res.type("text/xml");    
+  res.send(`
+    <Response>
+      <Message>Error en el bot</Message>
+    </Response>
+  `);
+}
+
 });
 
 app.listen(3000, () => {
